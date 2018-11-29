@@ -2,6 +2,7 @@ import requests
 import sys
 
 nome = sys.argv[1]
+porta = sys.argv[2]
 pos = 0
 
 def getChar():
@@ -29,10 +30,10 @@ print(desafio)
 tam = 0
 while tam < len(desafio):
     tmp = getChar()
-    r1 = requests.post('http://localhost:8080/usr/{}/put/{}'.format(nome, tmp))
+    r1 = requests.post('http://localhost:{}/usr/{}/put/{}'.format(porta, nome, tmp))
     meuTexto = str(r1.text)
     tam = len(meuTexto)
     print(meuTexto)
 
-r2 = requests.post('http://localhost:8080/usr/{}/digit/{}'.format(nome, tam))
+r2 = requests.post('http://localhost:{}/usr/{}/digit/{}'.format(porta, nome, tam))
 print(r2.text)
