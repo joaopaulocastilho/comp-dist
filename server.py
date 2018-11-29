@@ -49,7 +49,6 @@ def client_text():
             tmp_text = json.loads(r.text)
             time.sleep(1)
             #print(tmp_pos, tmp_text)
-            print(pos, textUser)
             if len(tmp_text) > len(textUser):
                 pos = len(tmp_text)
                 textUser = tmp_text
@@ -62,7 +61,7 @@ def compara(textUser, desafio, pos, code):
         textUser = textUser + code
         return pos + 1, textUser
     return pos, textUser
-    
+
 @post('/')
 def index():
     return desafio
