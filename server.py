@@ -26,7 +26,10 @@ def client():
         for p in peers:
             if p == sys.argv[1]:
                 continue
-            r = requests.get('http://localhost:' + p + '/peers/'+sys.argv[1])
+            try:
+                r = requests.get('http://localhost:' + p + '/peers/'+sys.argv[1])
+            except:
+                continue
             np = np + json.loads(r.text)
             time.sleep(1)
         peers[:] = list(set(np + peers))
@@ -39,13 +42,16 @@ def index():
 def client_text():
     global textUser
     global pos
-    time.sleep(5)
+    time.sleep(2)
     while True:
         time.sleep(1)
         for p in peers:
             if p == sys.argv[1]:
                 continue
-            r = requests.get('http://localhost:' + p + '/texts')
+            try:
+                r = requests.get('http://localhost:' + p + '/texts')
+            except:
+                continue
             tmp_text = json.loads(r.text)
             time.sleep(1)
             #print(tmp_pos, tmp_text)
@@ -77,6 +83,7 @@ def teste(name, code):
 def teste(name, qtd):
     global textUser
     global pos
+    #time.sleep(7)
     #textUser = ""
     #pos = 0
     return "Parabens {}, voce digitou a frase completa!".format(name)
